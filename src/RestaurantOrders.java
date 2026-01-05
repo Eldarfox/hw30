@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import domain.Item;
 import domain.Order;
 
 import java.io.IOException;
@@ -111,5 +112,13 @@ public class RestaurantOrders {
         return totalByCustomer().entrySet().stream()
                 .min(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey);
+    }
+    public Map<Item, Integer> soldItemsAmount() {
+        return orders.stream()
+                .flatMap(o -> o.getItems().stream())
+                .collect(Collectors.groupingBy(
+                        item -> item,
+                        Collectors.summingInt(Item::getAmount)
+                ));
     }
 }
