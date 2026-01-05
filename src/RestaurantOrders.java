@@ -4,10 +4,7 @@ import domain.Order;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RestaurantOrders {
@@ -91,4 +88,28 @@ public class RestaurantOrders {
                 .collect(Collectors.toList());
     }
 
+    public Map<String, List<Order>> ordersByCustomerName() {
+        return orders.stream()
+                .collect(Collectors.groupingBy(o -> o.getCustomer().getFullName()));
+    }
+
+    public Map<String, Double> totalByCustomer() {
+        return orders.stream()
+                .collect(Collectors.groupingBy(
+                        o -> o.getCustomer().getFullName(),
+                        Collectors.summingDouble(Order::getTotal)
+                ));
+    }
+
+    public Optional<String> customerWithMaxTotal() {
+        return totalByCustomer().entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey);
+    }
+
+    public Optional<String> customerWithMinTotal() {
+        return totalByCustomer().entrySet().stream()
+                .min(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey);
+    }
 }
