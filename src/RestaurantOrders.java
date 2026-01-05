@@ -4,7 +4,9 @@ import domain.Order;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RestaurantOrders {
     // Этот блок кода менять нельзя! НАЧАЛО!
@@ -31,13 +33,28 @@ public class RestaurantOrders {
     }
     // Этот блок кода менять нельзя! КОНЕЦ!
 
-    //----------------------------------------------------------------------
-    //------   Реализация ваших методов должна быть ниже этой линии   ------
-    //----------------------------------------------------------------------
+    public void printOrders() {
+        orders.forEach(System.out::println);
+    }
 
-    // Наполните этот класс решением домашнего задания.
-    // Вам необходимо создать все необходимые методы
-    // для решения заданий из домашки :)
-    // вы можете добавлять все необходимые imports
-    //
+    public List<Order> topNByTotal(int n) {
+        return orders.stream()
+                .sorted(Comparator.comparingDouble(Order::getTotal).reversed())
+                .limit(n)
+                .collect(Collectors.toList());
+    }
+
+    public List<Order> bottomNByTotal(int n) {
+        return orders.stream()
+                .sorted(Comparator.comparingDouble(Order::getTotal))
+                .limit(n)
+                .collect(Collectors.toList());
+    }
+
+    public List<Order> homeDeliveryOrders() {
+        return orders.stream()
+                .filter(Order::isHomeDelivery)
+                .collect(Collectors.toList());
+    }
+
 }
