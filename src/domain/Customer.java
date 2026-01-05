@@ -34,12 +34,4 @@ public class Customer {
         return email;
     }
     // Этот блок кода менять нельзя! КОНЕЦ!
-
-    public String shortInfo() {
-        return fullName + " <" + email + ">";
-    }
-
-    public boolean hasEmailDomain(String domain) {
-        return email.endsWith(domain);
-    }
 }

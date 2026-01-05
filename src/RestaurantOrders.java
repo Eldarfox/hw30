@@ -121,4 +121,12 @@ public class RestaurantOrders {
                         Collectors.summingInt(Item::getAmount)
                 ));
     }
+    public List<String> emailsByItemName(String itemName) {
+        return orders.stream()
+                .filter(o -> o.getItems().stream()
+                        .anyMatch(i -> i.getName().equalsIgnoreCase(itemName)))
+                .map(o -> o.getCustomer().getEmail())
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }

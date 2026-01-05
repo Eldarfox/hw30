@@ -1,0 +1,12 @@
+git init
+git add .
+git commit -m "init"
+git commit -m "Implement order total calculation"
+git commit -m "fix all files and create a method in the Order"
+git commit -m "Add basic order stream operations"
+git commit -m "Add order analytics"
+git commit -m "sorted customer emails"
+git commit -m "Group orders by customer and calculate totals"
+git commit -m "Add sold items statistics"
+ git commit -m "add some method in customer and item"
+git commit -m "upgrade main with menu ,fix some bugs and add commands.txt"

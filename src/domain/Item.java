@@ -53,12 +53,4 @@ public class Item {
         return type;
     }
     // Этот блок кода менять нельзя! КОНЕЦ!
-
-    public double totalPrice() {
-        return price * amount;
-    }
-
-    public boolean isType(String type) {
-        return this.type.equalsIgnoreCase(type);
-    }
 }
